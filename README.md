@@ -8,4 +8,4 @@ A repository dedicated to learning and practicing quantum computing using Xanadu
 * Quantum circuits: Designing and building reusable circuits and operations.
 * Entanglement in action: Practical implementations of quantum entanglement.
 * Measurement types: Understanding probabilities, samples, and expectation values.
-* more ...
+* Introduction to Quantum Computing 3/3
