@@ -1,0 +1,20 @@
+n_bits = 4
+dev = qp.device("default.qubit", wires=n_bits)
+
+@qp.qnode(dev)
+def hoh_circuit(combo):
+    """A circuit which applies Hadamard-oracle-Hadamard and returns probabilities.
+    
+    Args:
+        combo (list[int]): A list of bits representing a secret combination.
+
+    Returns:
+        list[float]: Measurement outcome probabilities.
+    """
+    for i in range(n_bits):
+        qp.H(wires= 0+i)
+    qp.QubitUnitary(oracle_matrix(combo) , wires=range(n_bits))
+    for i in range(n_bits):
+        qp.H(wires= 0+i)
+    
+    return qp.probs(wires=range(n_bits))
