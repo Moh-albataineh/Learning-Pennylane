@@ -1,0 +1,23 @@
+n_bits = 4
+dev = qp.device("default.qubit", wires=n_bits)
+
+@qp.qnode(dev)
+def multisol_hoh_circuit(combos):
+    """A circuit which applies Hadamard, multi-solution oracle, then Hadamard.
+    
+    Args:
+        combos (list[list[int]]): A list of secret bit strings.
+
+    Returns: 
+        array[float]: Probabilities for observing different outcomes.
+    """
+
+    for i in range(n_bits):
+        qp.H(wires=i)
+    
+    qp.QubitUnitary(multisol_oracle_matrix(combos) , wires=range(n_bits))
+    
+    for i in range(n_bits):
+        qp.H(wires=i)
+
+    return qp.probs(wires=range(n_bits))
